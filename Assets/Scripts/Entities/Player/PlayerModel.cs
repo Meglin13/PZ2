@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Player
 {
@@ -30,10 +31,7 @@ namespace Player
 
         #endregion
 
-        public PlayerModel() : base()
-        {
-            
-        }
+        public PlayerModel() : base() { }
 
         public PlayerModel(Stats stats, List<WeaponStats> weapons) : base(stats)
         {
@@ -47,6 +45,12 @@ namespace Player
         public void ChangeBullets()
         {
             CurrentBullets--;
+
+            if (CurrentBullets == 0)
+            {
+                Reload();
+            }
+
             OnBulletsChanged();
         }
 
@@ -63,12 +67,16 @@ namespace Player
         //TODO: Смена оружия
         public void NextWeapon()
         {
-            if (Weapons != null && CurrentWeapon != null)
+            if (Weapons != null && Weapons.Count > 1 && CurrentWeapon != null)
             {
                 var weaponIndex = Weapons.IndexOf(CurrentWeapon);
-                weaponIndex = weaponIndex + 1 > Weapons.Count - 1 ? weaponIndex + 1 : 0;
+                weaponIndex = weaponIndex + 1 <= Weapons.Count - 1 ? weaponIndex + 1 : 0;
+
+                Debug.Log(weaponIndex);
 
                 currentWeapon = Weapons[weaponIndex];
+
+                OnWeaponChanged();
             }
         }
 

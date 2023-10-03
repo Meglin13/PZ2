@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2230227528362624599}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,8 +51,8 @@ MonoBehaviour:
   view: {fileID: 0}
   stats: {fileID: 11400000, guid: 1c2dcb5f33992e04d925337fe4ae7cf4, type: 2}
   Sprite: {fileID: 4708190320490735082}
-  Weapon: {fileID: 2202744954816919814}
   weapons:
+  - {fileID: 11400000, guid: 10a98c8d71a62684796c9ab152b760e0, type: 2}
   - {fileID: 11400000, guid: 89a4969b1aeb8804186079250c09f110, type: 2}
   Bullets: 50
 --- !u!212 &2230227528362624683

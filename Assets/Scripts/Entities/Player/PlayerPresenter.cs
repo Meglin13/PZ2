@@ -6,8 +6,6 @@ namespace Player
     public class PlayerPresenter : EntityPresenter<PlayerModel, PlayerView>
     {
         [SerializeField]
-        public SpriteRenderer Weapon;
-        [SerializeField]
         private List<WeaponStats> weapons;
 
         private float bulletCooldownTimer;
@@ -20,7 +18,6 @@ namespace Player
             base.Initialize();
             
             model.SetWeapons(weapons);
-            Weapon.sprite = model.CurrentWeapon.WeaponSprite;
 
             model.OnBulletsChanged += () => view.UpdateView();
             model.OnWeaponChanged += () => view.UpdateView();
@@ -40,7 +37,7 @@ namespace Player
                 bulletCooldownTimer = 0;
 
                 model.ChangeBullets();
-                var bullet = Instantiate(model.CurrentWeapon.BulletPrefab, gameObject.transform.position, gameObject.transform.localRotation);
+                var bullet = Instantiate(model.CurrentWeapon.BulletPrefab, gameObject.transform.position, gameObject.transform.rotation);
                 bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.forward * model.CurrentWeapon.BulletSpeed;
             }
         }

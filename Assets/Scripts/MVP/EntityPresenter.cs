@@ -11,6 +11,8 @@ public  class EntityPresenter<TModel, TView> : MonoBehaviour, IPresenter
 {
     [SerializeField]
     protected TModel model;
+    public TModel Model => model;
+
     [SerializeField]
     protected TView view;
 
@@ -35,8 +37,8 @@ public  class EntityPresenter<TModel, TView> : MonoBehaviour, IPresenter
     {
         model = new TModel();
 
-        view.OnInit(this);
         model.OnInit(stats);
+        view.OnInit(this);
 
         model.OnHealthChange += () => view.UpdateView();
     }

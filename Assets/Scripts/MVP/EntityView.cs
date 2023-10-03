@@ -9,7 +9,10 @@ public class EntityView<TPresenter> : MonoBehaviour, IView
     [SerializeField]
     protected Image healthBar;
 
-    public virtual void OnInit(IPresenter presenter) => this.presenter = (TPresenter)presenter;
+    public virtual void OnInit(IPresenter presenter)
+    {
+        this.presenter = (TPresenter)presenter;
+    }
 
     public virtual void UpdateView() { }
 }

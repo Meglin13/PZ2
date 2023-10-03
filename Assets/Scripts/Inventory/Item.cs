@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace InventorySystem
 {
+    //TODO: Предметы
     public class Item : ScriptableObject
     {
 

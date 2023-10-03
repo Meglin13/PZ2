@@ -2,6 +2,7 @@ using MVP.Base.Interfaces;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Player
 {
@@ -9,11 +10,16 @@ namespace Player
     {
         [SerializeField]
         private TextMeshProUGUI bulletsText;
+
+        [SerializeField]
+        private SpriteRenderer Weapon;
+
         [SerializeField]
         private PlayerInput input;
         private InputAction moveAction;
         private InputAction fireAction;
         private InputAction inventoryAction;
+        private InputAction changeAction;
 
         public override void OnInit(IPresenter presenter)
         {
@@ -22,16 +28,18 @@ namespace Player
             moveAction = input.actions["Movement"];
             fireAction = input.actions["Fire"];
             inventoryAction = input.actions["Inventory"];
+            changeAction = input.actions["ChangeWeapon"];
 
-            //fireAction.performed += Fire;
+            changeAction.performed += ChangeWeapon;
             inventoryAction.performed += Inventory;
         }
 
-        //private void Fire(InputAction.CallbackContext obj)
-        //{
-        //    presenter.Attack();
-        //}
+        private void ChangeWeapon(InputAction.CallbackContext obj)
+        {
+            presenter.Model.NextWeapon();
+        }
 
+        //TODO: Открытие инвентаря
         private void Inventory(InputAction.CallbackContext obj)
         {
 
@@ -54,6 +62,8 @@ namespace Player
             bulletsText.text = presenter.GetBullets();
 
             healthBar.fillAmount = presenter.GetHealthProcentage();
+
+            Weapon.sprite = presenter.Model.CurrentWeapon.WeaponSprite;
         }
     }
 }
