@@ -1,33 +1,46 @@
-﻿using System.Collections.Generic;
+﻿using ObjectPooling;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerPresenter : EntityPresenter<PlayerModel, PlayerView>
     {
+        private Rigidbody2D rb;
+
         [SerializeField]
         private List<WeaponStats> weapons;
 
+        [SerializeField]
+        private GameObject gunPoint;
+        public GameObject GunPoint => gunPoint;
+
         private float bulletCooldownTimer;
+        private float weaponChangeCooldownTimer;
+        [SerializeField]
+        private float weaponChangeCooldown = 2;
 
         [SerializeField]
-        private int Bullets = 50;
+        private int bullets = 50;
 
         public override void Initialize()
         {
+            rb = GetComponent<Rigidbody2D>();
+
             base.Initialize();
-            
-            model.SetWeapons(weapons);
 
             model.OnBulletsChanged += () => view.UpdateView();
             model.OnWeaponChanged += () => view.UpdateView();
 
-            model.ChangeBullets(50);
+            model.SetWeapons(weapons, bullets);
+
+            view.UpdateView();
         }
 
         private void Update()
         {
             bulletCooldownTimer += Time.deltaTime;
+            weaponChangeCooldownTimer += Time.deltaTime;
         }
 
         public void Attack()
@@ -37,8 +50,31 @@ namespace Player
                 bulletCooldownTimer = 0;
 
                 model.ChangeBullets();
-                var bullet = Instantiate(model.CurrentWeapon.BulletPrefab, gameObject.transform.position, gameObject.transform.rotation);
-                bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.forward * model.CurrentWeapon.BulletSpeed;
+
+                var bullet = PoolerScript<BulletScript>.Instance.CreateObject(model.CurrentWeapon.BulletPrefab, GunPoint.transform.position);
+                bullet.transform.rotation = GunPoint.transform.rotation;
+                bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * model.CurrentWeapon.BulletSpeed;
+            }
+        }
+
+        public override void Move(Vector2 move)
+        {
+            base.Move(move);
+            if (move != Vector2.zero)
+            {
+                GunPoint.transform.localPosition = move.normalized * 2;
+
+                float rot_z = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
+                GunPoint.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+            }
+        }
+
+        public void ChangeWeapon()
+        {
+            if (weaponChangeCooldownTimer >= weaponChangeCooldown)
+            {
+                Model.NextWeapon();
+                weaponChangeCooldownTimer = 0;
             }
         }
 

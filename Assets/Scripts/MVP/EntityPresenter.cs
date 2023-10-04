@@ -53,7 +53,7 @@ public  class EntityPresenter<TModel, TView> : MonoBehaviour, IPresenter
         if (move != Vector2.zero)
         {
             transform.Translate(move * Time.deltaTime * EntityStats.Speed);
-            var y = move.x < 0 ? 180 : 0;
+            var y = move.x < 0 ? 180 : 0; 
             Sprite.transform.rotation = new Quaternion(0, y, 0, 0);
         }
     }

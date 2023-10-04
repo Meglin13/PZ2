@@ -1,0 +1,74 @@
+{
+    "name": "Debug",
+    "maps": [
+        {
+            "name": "Debug",
+            "id": "d308938d-42e1-493f-9c66-845106e58e73",
+            "actions": [
+                {
+                    "name": "Spawn Enemy",
+                    "type": "Button",
+                    "id": "f91dc9bc-bc30-4389-b99c-574a816e56a7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "fb19fa70-479e-4596-8fd9-c53e4735929e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SetFPS",
+                    "type": "Button",
+                    "id": "a3fb144b-963e-4dab-8cd6-04f4e9a46cb0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "01428467-22c0-45b9-bf3b-e7730ee713e1",
+                    "path": "<Keyboard>/rightBracket",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spawn Enemy",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e509a992-2ab8-4ada-a6ba-9a1b532e5367",
+                    "path": "<Keyboard>/backslash",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fabc7fa6-7d6f-41c8-a46c-a2b52957b19d",
+                    "path": "<Keyboard>/leftBracket",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SetFPS",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

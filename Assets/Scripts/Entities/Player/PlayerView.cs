@@ -34,9 +34,16 @@ namespace Player
             inventoryAction.performed += Inventory;
         }
 
+        //TODO: Сделать везде отписку от событий
+        private void OnDestroy()
+        {
+            changeAction.performed -= ChangeWeapon;
+            inventoryAction.performed -= Inventory;
+        }
+
         private void ChangeWeapon(InputAction.CallbackContext obj)
         {
-            presenter.Model.NextWeapon();
+            presenter.ChangeWeapon();
         }
 
         //TODO: Открытие инвентаря

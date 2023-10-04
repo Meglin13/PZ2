@@ -8,8 +8,8 @@ public class WeaponStats : ScriptableObject
     public Sprite WeaponSprite => weaponSprite;
 
     [SerializeField]
-    private GameObject bulletPrefab;
-    public GameObject BulletPrefab => bulletPrefab;
+    private BulletScript bulletPrefab;
+    public BulletScript BulletPrefab => bulletPrefab;
 
 
     [SerializeField]

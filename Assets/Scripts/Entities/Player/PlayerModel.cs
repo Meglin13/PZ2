@@ -38,7 +38,6 @@ namespace Player
             Weapons = weapons;
         }
 
-        //TODO: Стрельба
         /// <summary>
         /// Изменение количества пуль на -1
         /// </summary>
@@ -57,14 +56,13 @@ namespace Player
         /// <summary>
         /// Изменение количества пуль на заданное количество
         /// </summary>
-        /// <param name="amount"></param>
+        /// <param name="amount">Количество пуль</param>
         public void ChangeBullets(int amount)
         {
-            CurrentBullets += amount;
+            AvailableBullets += amount;
             OnBulletsChanged();
         }
 
-        //TODO: Смена оружия
         public void NextWeapon()
         {
             if (Weapons != null && Weapons.Count > 1 && CurrentWeapon != null)
@@ -72,11 +70,7 @@ namespace Player
                 var weaponIndex = Weapons.IndexOf(CurrentWeapon);
                 weaponIndex = weaponIndex + 1 <= Weapons.Count - 1 ? weaponIndex + 1 : 0;
 
-                Debug.Log(weaponIndex);
-
-                currentWeapon = Weapons[weaponIndex];
-
-                OnWeaponChanged();
+                SetWeapon(Weapons[weaponIndex]);
             }
         }
 
@@ -85,6 +79,9 @@ namespace Player
         /// </summary>
         public void Reload()
         {
+            availableBullets += currentBullets;
+            currentBullets = 0;
+
             if (AvailableBullets > 0)
             {
                 var bulletsReload = AvailableBullets > CurrentWeapon.BulletsAmount ?
@@ -97,10 +94,22 @@ namespace Player
             }
         }
 
-        public void SetWeapons(List<WeaponStats> weapons)
+        public void SetWeapons(List<WeaponStats> weapons, int bullets)
         {
             Weapons = weapons;
-            currentWeapon = Weapons[0];
+
+            availableBullets = bullets;
+
+            SetWeapon(Weapons[0]);
+        }
+
+        public void SetWeapon(WeaponStats weapon)
+        {
+            currentWeapon = weapon;
+
+            OnWeaponChanged();
+
+            Reload();
         }
     }
 }
