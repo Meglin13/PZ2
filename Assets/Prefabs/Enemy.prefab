@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1363648051756471485}
+  - component: {fileID: -5856204085664706293}
   - component: {fileID: 1363648051756471484}
   - component: {fileID: 6556188312737639807}
   - component: {fileID: -3827008166177529412}
-  - component: {fileID: -5856204085664706293}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -37,6 +37,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5856204085664706293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363648051756471486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddbcfacb9c5d57a4499bc1c7f370c8f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model:
+    Stats: {fileID: 0}
+    currentHealth: 0
+  view: {fileID: 9202653451211031051}
+  stats: {fileID: 11400000, guid: a54aff8316938574695954d09bb3f1a4, type: 2}
+  Sprite: {fileID: 1816517171823889259}
 --- !u!212 &1363648051756471484
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -123,7 +141,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363648051756471486}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -136,24 +154,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-5856204085664706293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363648051756471486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddbcfacb9c5d57a4499bc1c7f370c8f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model:
-    Stats: {fileID: 0}
-    currentHealth: 0
-  view: {fileID: 9202653451211031051}
-  stats: {fileID: 11400000, guid: a54aff8316938574695954d09bb3f1a4, type: 2}
-  Sprite: {fileID: 1816517171823889259}
 --- !u!1 &1816517171823889259
 GameObject:
   m_ObjectHideFlags: 0

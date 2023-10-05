@@ -16,7 +16,7 @@ namespace ObjectPooling
 
         public ObjectAmountList<T> objectsList;
 
-        private void Start()
+        public void Start()
         {
             Initialize();
 

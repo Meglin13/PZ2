@@ -21,6 +21,7 @@ namespace Inventory
             if (collision.gameObject.tag == "Player")
             {
                 Debug.Log("Got item!");
+                item.OnPickUp();
             }
         }
     }

@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.akaal.pvcustomizer": {
+      "version": "https://github.com/h-sigma/PvCustomizer.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3a1bbc47aa7bb50b051b3ff6fdecc584c05f45c3"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.10",
       "depth": 1,
@@ -213,6 +220,15 @@
       "depth": 2,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.recorder": {
+      "version": "3.0.3",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.subsystemregistration": {

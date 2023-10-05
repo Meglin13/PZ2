@@ -1,65 +1,72 @@
 using MVP.Base.Interfaces;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(Rigidbody2D))]
-public  class EntityPresenter<TModel, TView> : MonoBehaviour, IPresenter
-    where TModel : EntityModel, new()
-    where TView : IView
+namespace Entities
 {
-    [SerializeField]
-    protected TModel model;
-    public TModel Model => model;
-
-    [SerializeField]
-    protected TView view;
-
-    [SerializeField]
-    protected Stats stats;
-    public Stats EntityStats => stats;
-
-    [SerializeField]
-    private GameObject Sprite;
-
-    private void OnValidate()
+    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(Rigidbody2D))]
+    public class EntityPresenter<TModel, TView> : MonoBehaviour, IPresenter
+        where TModel : EntityModel, new()
+        where TView : IView
     {
-        GetComponent<Rigidbody2D>().gravityScale = 0;
-    }
+        [SerializeField]
+        protected TModel model;
+        public TModel Model => model;
 
-    private void Awake()
-    {
-        Initialize();
-    }
+        [SerializeField]
+        protected TView view;
 
-    public virtual void Initialize()
-    {
-        model = new TModel();
+        [SerializeField]
+        protected Stats stats;
+        public Stats EntityStats => stats;
 
-        model.OnInit(stats);
-        view.OnInit(this);
+        [SerializeField]
+        private GameObject Sprite;
 
-        model.OnHealthChange += () => view.UpdateView();
-    }
-
-    public void Uninitialize()
-    {
-        model.ClearEvents();
-    }
-
-    public virtual void Move(Vector2 move)
-    {
-        if (move != Vector2.zero)
+        private void OnValidate()
         {
-            transform.Translate(move * Time.deltaTime * EntityStats.Speed);
-            var y = move.x < 0 ? 180 : 0; 
-            Sprite.transform.rotation = new Quaternion(0, y, 0, 0);
+            GetComponent<Rigidbody2D>().gravityScale = 0;
         }
-    }
 
-    public float GetHealthProcentage()
-    {
-        return model.CurrentHealth / EntityStats.Health;
+        private void Awake()
+        {
+            Initialize();
+        }
+
+        private void OnEnable()
+        {
+            model.OnInit();
+        }
+
+        public virtual void Initialize()
+        {
+            model = new TModel();
+
+            model.OnInit(stats);
+            view.OnInit(this);
+
+            model.OnHealthChange += () => view.UpdateView();
+            model.OnDeath += () => gameObject.SetActive(false);
+        }
+
+        public void Uninitialize()
+        {
+            model.ClearEvents();
+        }
+
+        public virtual void Move(Vector2 move)
+        {
+            if (move != Vector2.zero)
+            {
+                transform.Translate(move * Time.deltaTime * EntityStats.Speed);
+                var y = move.x < 0 ? 180 : 0;
+                Sprite.transform.rotation = new Quaternion(0, y, 0, 0);
+            }
+        }
+
+        public float GetHealthProcentage()
+        {
+            return model.CurrentHealth / EntityStats.Health;
+        }
     }
 }

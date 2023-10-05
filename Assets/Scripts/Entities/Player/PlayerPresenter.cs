@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Player
+namespace Entities.Player
 {
     public class PlayerPresenter : EntityPresenter<PlayerModel, PlayerView>
     {
-        private Rigidbody2D rb;
-
         [SerializeField]
         private List<WeaponStats> weapons;
 
@@ -25,8 +23,6 @@ namespace Player
 
         public override void Initialize()
         {
-            rb = GetComponent<Rigidbody2D>();
-
             base.Initialize();
 
             model.OnBulletsChanged += () => view.UpdateView();
@@ -53,7 +49,7 @@ namespace Player
 
                 var bullet = PoolerScript<BulletScript>.Instance.CreateObject(model.CurrentWeapon.BulletPrefab, GunPoint.transform.position);
                 bullet.transform.rotation = GunPoint.transform.rotation;
-                bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * model.CurrentWeapon.BulletSpeed;
+                bullet.RB.velocity = bullet.transform.up * model.CurrentWeapon.BulletSpeed;
             }
         }
 

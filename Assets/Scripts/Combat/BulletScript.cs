@@ -1,12 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using Entities;
+using MVP.Base.Interfaces;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class BulletScript : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    [SerializeField]
+    private Rigidbody2D rb;
+    public Rigidbody2D RB => rb;
+    [SerializeField]
+    private WeaponStats weaponStats;
 
     private void OnEnable()
     {
@@ -16,9 +20,13 @@ public class BulletScript : MonoBehaviour
         }
     }
 
-    //TODO: Попадание в цель
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.TryGetComponent<EnemyPresenter>(out var presenter))
+        {
+            presenter.Model.ChangeHealth(-weaponStats.Damage);
+        }
+
         gameObject.SetActive(false);
     }
 }

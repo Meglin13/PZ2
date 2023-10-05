@@ -2,17 +2,20 @@ using MVP.Base.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EntityView<TPresenter> : MonoBehaviour, IView
-    where TPresenter : IPresenter
+namespace Entities
 {
-    protected TPresenter presenter;
-    [SerializeField]
-    protected Image healthBar;
-
-    public virtual void OnInit(IPresenter presenter)
+    public class EntityView<TPresenter> : MonoBehaviour, IView
+        where TPresenter : IPresenter
     {
-        this.presenter = (TPresenter)presenter;
-    }
+        protected TPresenter presenter;
+        [SerializeField]
+        protected Image healthBar;
 
-    public virtual void UpdateView() { }
+        public virtual void OnInit(IPresenter presenter)
+        {
+            this.presenter = (TPresenter)presenter;
+        }
+
+        public virtual void UpdateView() { }
+    }
 }

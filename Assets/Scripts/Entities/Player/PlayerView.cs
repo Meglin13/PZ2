@@ -2,9 +2,8 @@ using MVP.Base.Interfaces;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
-namespace Player
+namespace Entities.Player
 {
     public class PlayerView : EntityView<PlayerPresenter>
     {
@@ -66,9 +65,10 @@ namespace Player
 
         public override void UpdateView()
         {
-            bulletsText.text = presenter.GetBullets();
-
+            //TODO: Перенести в родителя
             healthBar.fillAmount = presenter.GetHealthProcentage();
+
+            bulletsText.text = presenter.GetBullets();
 
             Weapon.sprite = presenter.Model.CurrentWeapon.WeaponSprite;
         }
