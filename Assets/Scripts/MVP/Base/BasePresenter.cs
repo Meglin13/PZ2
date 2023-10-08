@@ -1,17 +1,26 @@
 ﻿using MVP.Base.Interfaces;
 using UnityEngine;
 
-namespace Assets.Scripts.MVP.Base
+namespace MVP.Base
 {
     public class BasePresenter<TV, TM> : MonoBehaviour, IPresenter
         where TV : IView
-        where TM : IModel
+        where TM : IModel, new()
     {
         [SerializeField]
         protected TV view;
-        protected TM model;
 
-        public void Init(TV view, TM model)
+        [SerializeField]
+        protected TM model = new TM();
+
+        public TM Model => model;
+
+        public virtual void Awake()
+        {
+            Init(view, model);
+        }
+
+        public virtual void Init(TV view, TM model)
         {
             this.view = view;
             this.model = model;

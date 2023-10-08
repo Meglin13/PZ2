@@ -1,8 +1,9 @@
 ﻿using MVP.Base.Interfaces;
-using UnityEngine;
+using System;
 
 namespace MVP.Base
 {
+    [Serializable]
     public abstract class BaseModel<TP> : IModel
         where TP : IPresenter
     {
@@ -10,14 +11,9 @@ namespace MVP.Base
         public TP Presenter => presenter;
 
         public BaseModel()
-        {
-            
-        }
+        { }
 
-        public BaseModel(IPresenter presenter) 
-        {
-            this.presenter = (TP)presenter;        
-        }
+        public BaseModel(IPresenter presenter) => this.presenter = (TP)presenter;
 
         public abstract void OnInit();
     }

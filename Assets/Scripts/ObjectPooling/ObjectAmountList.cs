@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
-public class ObjectAmountList<T> where T : MonoBehaviour
+public class ObjectAmountList<T> where T : class
 {
     public List<ObjectAmountElement<T>> list;
+
+    private int capacity;
+    public int Capacity => capacity;
 
     public List<T> GetList()
     {
@@ -17,11 +19,11 @@ public class ObjectAmountList<T> where T : MonoBehaviour
         return list;
     }
 
-    public void AddItem(T item, int amount) => list.Add(new(item, amount));
+    public void Add(T item, int amount) => list.Add(new(item, amount));
 }
 
 [Serializable]
-public class ObjectAmountElement<T> where T : MonoBehaviour
+public class ObjectAmountElement<T> where T : class
 {
     public T item;
     public int amount = 1;

@@ -3,6 +3,7 @@
     public interface IView
     {
         public void OnInit(IPresenter presenter);
+
         public void UpdateView();
     }
 }

@@ -1,5 +1,3 @@
-using Entities;
-using MVP.Base.Interfaces;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -8,7 +6,9 @@ public class BulletScript : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody2D rb;
+
     public Rigidbody2D RB => rb;
+
     [SerializeField]
     private WeaponStats weaponStats;
 
@@ -16,7 +16,7 @@ public class BulletScript : MonoBehaviour
     {
         if (rb == null)
         {
-            rb = GetComponent<Rigidbody2D>(); 
+            rb = GetComponent<Rigidbody2D>();
         }
     }
 
@@ -24,7 +24,7 @@ public class BulletScript : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<EnemyPresenter>(out var presenter))
         {
-            presenter.Model.ChangeHealth(-weaponStats.Damage);
+            presenter.Model.Health.ChangeValue(-weaponStats.Damage);
         }
 
         gameObject.SetActive(false);

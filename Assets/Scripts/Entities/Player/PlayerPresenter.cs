@@ -11,10 +11,12 @@ namespace Entities.Player
 
         [SerializeField]
         private GameObject gunPoint;
+
         public GameObject GunPoint => gunPoint;
 
         private float bulletCooldownTimer;
         private float weaponChangeCooldownTimer;
+
         [SerializeField]
         private float weaponChangeCooldown = 2;
 
@@ -25,10 +27,10 @@ namespace Entities.Player
         {
             base.Initialize();
 
-            model.OnBulletsChanged += () => view.UpdateView();
-            model.OnWeaponChanged += () => view.UpdateView();
-
             model.SetWeapons(weapons, bullets);
+
+            model.Bullets.OnValueChanged += () => view.UpdateView();
+            model.OnWeaponChanged += () => view.UpdateView(); ;
 
             view.UpdateView();
         }
@@ -41,11 +43,11 @@ namespace Entities.Player
 
         public void Attack()
         {
-            if (model.CurrentBullets > 0 & bulletCooldownTimer > model.CurrentWeapon.CooldownBetweenShots)
+            if (model.Bullets.CurrentValue > 0 & bulletCooldownTimer > model.CurrentWeapon.CooldownBetweenShots)
             {
                 bulletCooldownTimer = 0;
 
-                model.ChangeBullets();
+                model.Bullets.ChangeValue();
 
                 var bullet = PoolerScript<BulletScript>.Instance.CreateObject(model.CurrentWeapon.BulletPrefab, GunPoint.transform.position);
                 bullet.transform.rotation = GunPoint.transform.rotation;
@@ -74,9 +76,6 @@ namespace Entities.Player
             }
         }
 
-        public string GetBullets()
-        {
-            return model.CurrentBullets + "/" + model.AvailableBullets;
-        }
+        public string GetBullets() => model.Bullets.CurrentValue + "/" + model.Bullets.AvailableBullets;
     }
 }

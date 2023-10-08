@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd744debff47b341b533904a0f9a77a, type: 3}
+  m_Name: MidBullets
+  m_EditorClassIdentifier: 
+  id: 4859c66890cfb284f80ed39742d340fc
+  InstanceID: 
+  _name: "\u041A\u043E\u0440\u043E\u0431\u043A\u0430 \u0441 \u0431\u043E\u0435\u043F\u0440\u0438\u043F\u0430\u0441\u0430\u043C\u0438"
+  desc: "+ 20 \u043F\u0443\u043B\u044C"
+  stackCapacity: 999
+  icon: {fileID: 21300000, guid: d45f0cae013abb84688afe6e4bc52845, type: 3}
+  supplyAmount: 20

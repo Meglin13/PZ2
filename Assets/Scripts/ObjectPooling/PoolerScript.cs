@@ -5,10 +5,12 @@ namespace ObjectPooling
     public class PoolerScript<T> : MonoBehaviour where T : MonoBehaviour
     {
         public static PoolerScript<T> Instance;
+
         public void Initialize() => Instance = this;
 
         [SerializeField]
         private int poolCount = 10;
+
         [SerializeField]
         private bool autoExpand = false;
 

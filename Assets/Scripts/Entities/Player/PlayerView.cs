@@ -8,6 +8,9 @@ namespace Entities.Player
     public class PlayerView : EntityView<PlayerPresenter>
     {
         [SerializeField]
+        private GameObject inventory;
+
+        [SerializeField]
         private TextMeshProUGUI bulletsText;
 
         [SerializeField]
@@ -15,6 +18,7 @@ namespace Entities.Player
 
         [SerializeField]
         private PlayerInput input;
+
         private InputAction moveAction;
         private InputAction fireAction;
         private InputAction inventoryAction;
@@ -33,7 +37,6 @@ namespace Entities.Player
             inventoryAction.performed += Inventory;
         }
 
-        //TODO: Сделать везде отписку от событий
         private void OnDestroy()
         {
             changeAction.performed -= ChangeWeapon;
@@ -45,10 +48,9 @@ namespace Entities.Player
             presenter.ChangeWeapon();
         }
 
-        //TODO: Открытие инвентаря
         private void Inventory(InputAction.CallbackContext obj)
         {
-
+            inventory.SetActive(!inventory.activeSelf);
         }
 
         private void Update()

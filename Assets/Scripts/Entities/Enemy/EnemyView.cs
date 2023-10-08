@@ -1,6 +1,5 @@
 ﻿using Entities;
 using MVP.Base.Interfaces;
-using UnityEngine;
 
 public class EnemyView : EntityView<EnemyPresenter>
 {

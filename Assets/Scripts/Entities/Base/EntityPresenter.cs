@@ -11,6 +11,7 @@ namespace Entities
     {
         [SerializeField]
         protected TModel model;
+
         public TModel Model => model;
 
         [SerializeField]
@@ -18,25 +19,17 @@ namespace Entities
 
         [SerializeField]
         protected Stats stats;
+
         public Stats EntityStats => stats;
 
         [SerializeField]
         private GameObject Sprite;
 
-        private void OnValidate()
-        {
-            GetComponent<Rigidbody2D>().gravityScale = 0;
-        }
+        private void Awake() => Initialize();
 
-        private void Awake()
-        {
-            Initialize();
-        }
+        private void OnEnable() => model?.OnInit();
 
-        private void OnEnable()
-        {
-            model.OnInit();
-        }
+        private void OnDestroy() => Uninitialize();
 
         public virtual void Initialize()
         {
@@ -45,14 +38,11 @@ namespace Entities
             model.OnInit(stats);
             view.OnInit(this);
 
-            model.OnHealthChange += () => view.UpdateView();
-            model.OnDeath += () => gameObject.SetActive(false);
+            model.Health.OnValueChanged += () => view.UpdateView();
+            model.Health.OnValueEmpty += () => gameObject.SetActive(false);
         }
 
-        public void Uninitialize()
-        {
-            model.ClearEvents();
-        }
+        public void Uninitialize() => model.ClearEvents();
 
         public virtual void Move(Vector2 move)
         {
@@ -64,9 +54,6 @@ namespace Entities
             }
         }
 
-        public float GetHealthProcentage()
-        {
-            return model.CurrentHealth / EntityStats.Health;
-        }
+        public float GetHealthProcentage() => model.Health.CurrentValue / EntityStats.Health;
     }
 }

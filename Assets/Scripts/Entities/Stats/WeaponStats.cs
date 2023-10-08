@@ -1,9 +1,11 @@
+using Akaal.PvCustomizer.Scripts;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Stats/WeaponStats", menuName = "WeaponStats")]
+[CreateAssetMenu(fileName = "WeaponStats", menuName = "Stats/WeaponStats")]
 public class WeaponStats : ScriptableObject
 {
     [SerializeField]
+    [PvIcon]
     private Sprite weaponSprite;
     public Sprite WeaponSprite => weaponSprite;
 
@@ -11,11 +13,9 @@ public class WeaponStats : ScriptableObject
     private BulletScript bulletPrefab;
     public BulletScript BulletPrefab => bulletPrefab;
 
-
     [SerializeField]
     private int bulletsAmount;
     public int BulletsAmount => bulletsAmount;
-
 
     [SerializeField]
     private float cooldownBetweenShots;
@@ -26,6 +26,6 @@ public class WeaponStats : ScriptableObject
     public float BulletSpeed => bulletSpeed;
 
     [SerializeField]
-    private float damage;
-    public float Damage => damage;
+    private int damage;
+    public int Damage => damage;
 }

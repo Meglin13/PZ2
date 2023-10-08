@@ -9,57 +9,20 @@ namespace Entities.Player
 
         private WeaponStats currentWeapon;
         public WeaponStats CurrentWeapon => currentWeapon;
+
         private List<WeaponStats> Weapons;
 
-        private float currentBullets;
-        public float CurrentBullets
-        {
-            get => currentBullets;
-            set => currentBullets = value;
-        }
+        private BulletsStat bullets = new BulletsStat();
+        public BulletsStat Bullets => bullets;
 
-        private float availableBullets;
-        public float AvailableBullets
-        {
-            get => availableBullets;
-            set => availableBullets = value;
-        }
-
-        public event Action OnBulletsChanged = delegate { };
         public event Action OnWeaponChanged = delegate { };
 
-        #endregion
+        #endregion Weapons
 
-        public PlayerModel() : base() { }
-
-        public PlayerModel(Stats stats, List<WeaponStats> weapons) : base(stats)
+        public override void OnInit()
         {
-            Weapons = weapons;
-        }
-
-        /// <summary>
-        /// Изменение количества пуль на -1
-        /// </summary>
-        public void ChangeBullets()
-        {
-            CurrentBullets--;
-
-            if (CurrentBullets == 0)
-            {
-                Reload();
-            }
-
-            OnBulletsChanged();
-        }
-
-        /// <summary>
-        /// Изменение количества пуль на заданное количество
-        /// </summary>
-        /// <param name="amount">Количество пуль</param>
-        public void ChangeBullets(int amount)
-        {
-            AvailableBullets += amount;
-            OnBulletsChanged();
+            base.OnInit();
+            statsList.Add(Bullets);
         }
 
         public void NextWeapon()
@@ -73,31 +36,11 @@ namespace Entities.Player
             }
         }
 
-        /// <summary>
-        /// Перезарядка оружия
-        /// </summary>
-        public void Reload()
-        {
-            availableBullets += currentBullets;
-            currentBullets = 0;
-
-            if (AvailableBullets > 0)
-            {
-                var bulletsReload = AvailableBullets > CurrentWeapon.BulletsAmount ?
-                    CurrentWeapon.BulletsAmount :
-                    AvailableBullets;
-
-                AvailableBullets -= bulletsReload;
-                CurrentBullets = bulletsReload;
-                OnBulletsChanged();
-            }
-        }
-
         public void SetWeapons(List<WeaponStats> weapons, int bullets)
         {
             Weapons = weapons;
 
-            availableBullets = bullets;
+            this.bullets.AvailableBullets = bullets;
 
             SetWeapon(Weapons[0]);
         }
@@ -105,10 +48,11 @@ namespace Entities.Player
         public void SetWeapon(WeaponStats weapon)
         {
             currentWeapon = weapon;
+            bullets.SetWeapoBulletsAmount(weapon.BulletsAmount);
+
+            Bullets.Reload();
 
             OnWeaponChanged();
-
-            Reload();
         }
     }
 }

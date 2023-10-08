@@ -1,12 +1,12 @@
 ﻿using Akaal.PvCustomizer.Scripts;
-using System.IO;
+using Entities.Player;
+using InventorySystem.Inventory;
 using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
 
 namespace InventorySystem
 {
-    //TODO: Предметы
     public abstract class Item : ScriptableObject
     {
         #region [Instances Managment]
@@ -15,9 +15,6 @@ namespace InventorySystem
         public virtual void OnValidate()
         {
             id = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(this));
-
-            string assetPath = AssetDatabase.GetAssetPath(this.GetInstanceID());
-            this.itemName = Path.GetFileNameWithoutExtension(assetPath);
         }
 #endif
 
@@ -26,19 +23,29 @@ namespace InventorySystem
         private string id;
         public string ID => id;
 
-        [ReadOnly]
         public string InstanceID;
         public static int lastID = 0;
 
         [SerializeField]
-        [PvIcon]
-        private string itemName;
-        public string ItemName => itemName;
-
+        private string _name;
+        public string Name => _name;
 
         [SerializeField]
+        private string desc;
+        public string Desc => desc;
+
+        private int amount = 1;
+        public int Amount { get => amount; set => amount = value; }
+
+        [SerializeField]
+        private int stackCapacity = 999;
+        public int StackCapacity => stackCapacity;
+
+        [SerializeField]
+        [PvIcon]
         private Sprite icon;
         public Sprite Icon => icon;
+
 
         public Item GetCopy()
         {
@@ -52,8 +59,12 @@ namespace InventorySystem
 
         #endregion
 
-        public abstract void OnPickUp();
+        //TODO: Добавление предмета в инвентарь
+        public virtual void OnPickUp(InventoryModel inventory)
+        {
+            inventory.AddItem(this);
+        }
 
-        public abstract void UseItem();
+        public abstract void UseItem(PlayerModel player);
     }
 }
