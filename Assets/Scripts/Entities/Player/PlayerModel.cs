@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Entities.Player
 {
+    [Serializable]
     public class PlayerModel : EntityModel
     {
         #region Weapons

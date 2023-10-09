@@ -1,5 +1,5 @@
 ﻿using Entities;
-using Inventory;
+using InventorySystem.Items;
 using UnityEngine;
 
 public class EnemyPresenter : EntityPresenter<EntityModel, EnemyView>
@@ -15,7 +15,9 @@ public class EnemyPresenter : EntityPresenter<EntityModel, EnemyView>
         base.Initialize();
 
         model.Health.OnValueEmpty += Death;
+
         item.transform.SetParent(null);
+        item.gameObject.SetActive(false);
     }
 
     private void Death()

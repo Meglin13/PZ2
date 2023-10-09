@@ -1,4 +1,5 @@
-﻿using MVP.Base;
+﻿using InventorySystem.Items;
+using MVP.Base;
 using MVP.Base.Interfaces;
 using System.Collections.Generic;
 using TMPro;
@@ -15,6 +16,7 @@ namespace InventorySystem.Inventory
         private GameObject InventoryContainer;
 
         private List<InventorySlot> InventorySlots = new List<InventorySlot>();
+        [SerializeField]
         private Item itemContext;
 
         [SerializeField]
@@ -64,23 +66,20 @@ namespace InventorySystem.Inventory
 
         public void SetInfoBox(Item item = null)
         {
+            itemContext = item;
+
             if (item != null)
             {
-                itemContext = item;
-
                 itemNameText.text = item.Name;
                 itemDescText.text = item.Desc;
             }
             else
             {
-                itemContext = null;
-
                 itemNameText.text = string.Empty;
                 itemDescText.text = string.Empty;
             }
         }
 
-        //TODO: Кнопки инвентаря
         public void DeleteItemButtonClicked()
         {
             if (itemContext != null)
@@ -93,7 +92,7 @@ namespace InventorySystem.Inventory
         {
             if (itemContext != null)
             {
-                itemContext.UseItem(Presenter.PlayerPresenter.Model);
+                Presenter.UseItem(itemContext);
             }
         }
     }

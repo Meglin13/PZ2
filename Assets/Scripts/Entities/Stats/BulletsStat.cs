@@ -3,6 +3,7 @@ using System;
 
 namespace Entities
 {
+    [Serializable]
     public class BulletsStat : IStat
     {
         private int value;

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c1fa820d03e4949b65cd252175a4a9, type: 3}
+  m_Name: SmallAid
+  m_EditorClassIdentifier: 
+  id: b69c4e12d5e317c49a0ad97985a3f542
+  InstanceID: 
+  _name: "\u041C\u0430\u043B\u0435\u043D\u044C\u043A\u0430\u044F \u0430\u043F\u0442\u0435\u0447\u043A\u0430"
+  desc: "+ 10 \u043A \u0417\u0434\u043E\u0440\u043E\u0432\u044C\u044E"
+  amount: 1
+  stackCapacity: 999
+  icon: {fileID: 21300000, guid: f9138354371ce3b4b9b788b42e35d4b8, type: 3}
+  supplyAmount: 10

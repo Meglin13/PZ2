@@ -16,5 +16,5 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7872899956926906017, guid: 31fca9dd735383748b996230d00bf68d, type: 3}
   bulletsAmount: 12
   cooldownBetweenShots: 1
-  bulletSpeed: 20
+  bulletSpeed: 30
   damage: 15

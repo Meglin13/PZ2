@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2685970941641748283
+--- !u!1001 &3964567989835900642
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,35 +9,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3018449970046668265, guid: 432a9e1b4e1418c4fb2f8a92bc558305, type: 3}
       propertyPath: Items.Array.size
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3018449970046668265, guid: 432a9e1b4e1418c4fb2f8a92bc558305, type: 3}
       propertyPath: Items.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: cc18732974e7d8a4e9eb1d21c738d9c8, type: 2}
+      objectReference: {fileID: 11400000, guid: 319622d7777aebd4998800df1243eef5, type: 2}
     - target: {fileID: 3018449970046668265, guid: 432a9e1b4e1418c4fb2f8a92bc558305, type: 3}
       propertyPath: Items.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 319622d7777aebd4998800df1243eef5, type: 2}
+      objectReference: {fileID: 11400000, guid: cc18732974e7d8a4e9eb1d21c738d9c8, type: 2}
     - target: {fileID: 3018449970046668265, guid: 432a9e1b4e1418c4fb2f8a92bc558305, type: 3}
       propertyPath: Items.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: b69c4e12d5e317c49a0ad97985a3f542, type: 2}
-    - target: {fileID: 3018449970046668265, guid: 432a9e1b4e1418c4fb2f8a92bc558305, type: 3}
-      propertyPath: Items.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 20ac0cae608b59740af7951860f953b9, type: 2}
-    - target: {fileID: 3018449970046668265, guid: 432a9e1b4e1418c4fb2f8a92bc558305, type: 3}
-      propertyPath: Items.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: 4859c66890cfb284f80ed39742d340fc, type: 2}
-    - target: {fileID: 3018449970046668265, guid: 432a9e1b4e1418c4fb2f8a92bc558305, type: 3}
-      propertyPath: Items.Array.data[5]
-      value: 
-      objectReference: {fileID: 11400000, guid: de90eb99f3fec154789b761c55334ec7, type: 2}
     - target: {fileID: 5009994041276709614, guid: 432a9e1b4e1418c4fb2f8a92bc558305, type: 3}
       propertyPath: m_Name
-      value: AnyItem
+      value: Aid
       objectReference: {fileID: 0}
     - target: {fileID: 7152759389458202525, guid: 432a9e1b4e1418c4fb2f8a92bc558305, type: 3}
       propertyPath: m_RootOrder

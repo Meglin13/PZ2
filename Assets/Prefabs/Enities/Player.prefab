@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2230227528362624680}
   - component: {fileID: 2230227528362624597}
+  - component: {fileID: 7795498398975617550}
   - component: {fileID: 2230227528362624683}
   - component: {fileID: 2230227528362624596}
   - component: {fileID: 2230227528362624599}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -52,12 +53,30 @@ MonoBehaviour:
   view: {fileID: 0}
   stats: {fileID: 11400000, guid: 1c2dcb5f33992e04d925337fe4ae7cf4, type: 2}
   Sprite: {fileID: 4708190320490735082}
+  mediator: {fileID: 0}
   weapons:
   - {fileID: 11400000, guid: 10a98c8d71a62684796c9ab152b760e0, type: 2}
   - {fileID: 11400000, guid: 89a4969b1aeb8804186079250c09f110, type: 2}
   gunPoint: {fileID: 8758114839267028361}
   weaponChangeCooldown: 1
   bullets: 99
+  detector: {fileID: 7795498398975617550}
+--- !u!114 &7795498398975617550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2230227528362624681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96030fb49b6349b4a9cf25b5a73ae11a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRadius: 7
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!212 &2230227528362624683
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -144,7 +163,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2230227528362624681}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -167,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6202114799158346573}
   - component: {fileID: 4724323777833617962}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +269,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 271075085530558994}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3331355332862724890}
   - component: {fileID: 2202744954816919814}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7479340784117219793}
   - component: {fileID: 9102973853392650971}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GunPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,4 +1,5 @@
 ﻿using InventorySystem;
+using InventorySystem.Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +29,8 @@ namespace UI
         {
             if (item != null)
             {
+                itemContext = item;
+
                 icon.enabled = true;
                 Button.enabled = true;
                 icon.sprite = item.Icon;

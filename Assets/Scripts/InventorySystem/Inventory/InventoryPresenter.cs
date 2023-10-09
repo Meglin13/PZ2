@@ -1,21 +1,27 @@
-﻿using Entities.Player;
+﻿using InventorySystem.Items;
 using MVP.Base;
-using UnityEngine;
 
 namespace InventorySystem.Inventory
 {
     public class InventoryPresenter : BasePresenter<InventoryView, InventoryModel>
     {
-        [SerializeField]
-        private PlayerPresenter playerPresenter;
-
-        public PlayerPresenter PlayerPresenter => playerPresenter;
+        private InventoryPlayerMediator mediator;
 
         public override void Init(InventoryView view, InventoryModel model)
         {
             base.Init(view, model);
 
             model.OnInventoryChanged += () => view.UpdateView();
+        }
+
+        public void SetInventoryMediator(InventoryPlayerMediator mediator)
+        {
+            this.mediator = mediator;
+        }
+
+        public void UseItem(Item item)
+        {
+            mediator.PlayerUsedItem(item);
         }
     }
 }

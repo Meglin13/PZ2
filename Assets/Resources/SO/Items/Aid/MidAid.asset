@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c1fa820d03e4949b65cd252175a4a9, type: 3}
+  m_Name: MidAid
+  m_EditorClassIdentifier: 
+  id: 319622d7777aebd4998800df1243eef5
+  InstanceID: 
+  _name: "\u041F\u0443\u0437\u044B\u0440\u0435\u043A \u0441\u043E \u0441\u043F\u0438\u0440\u0442\u043E\u043C"
+  desc: "+ 30 \u043A \u0417\u0434\u043E\u0440\u043E\u0432\u044C\u044E"
+  amount: 1
+  stackCapacity: 999
+  icon: {fileID: 21300000, guid: 7355926e1f3771343b58f84c4fe4e57d, type: 3}
+  supplyAmount: 30

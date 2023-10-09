@@ -1,12 +1,14 @@
 ﻿using Akaal.PvCustomizer.Scripts;
 using Entities.Player;
 using InventorySystem.Inventory;
+using System;
 using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
 
-namespace InventorySystem
+namespace InventorySystem.Items
 {
+    [Serializable]
     public abstract class Item : ScriptableObject
     {
         #region [Instances Managment]
@@ -34,6 +36,7 @@ namespace InventorySystem
         private string desc;
         public string Desc => desc;
 
+        [SerializeField]
         private int amount = 1;
         public int Amount { get => amount; set => amount = value; }
 
@@ -59,7 +62,6 @@ namespace InventorySystem
 
         #endregion
 
-        //TODO: Добавление предмета в инвентарь
         public virtual void OnPickUp(InventoryModel inventory)
         {
             inventory.AddItem(this);

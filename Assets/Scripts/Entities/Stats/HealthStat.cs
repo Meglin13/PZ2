@@ -4,20 +4,24 @@ using UnityEngine;
 
 namespace Entities
 {
+    [Serializable]
     public class HealthStat : IStat
     {
-        private int value;
+        private int MaxValue;
+
+        [SerializeField]
+        private int currentValue;
 
         public int CurrentValue
         {
-            get => value;
+            get => currentValue;
             set
             {
-                this.value = Mathf.Clamp(this.value, 0, value);
+                currentValue = Mathf.Clamp(value, 0, MaxValue);
 
                 OnValueChanged();
 
-                if (this.value == 0)
+                if (currentValue == 0)
                 {
                     OnValueEmpty();
                 }
@@ -25,12 +29,17 @@ namespace Entities
         }
 
         public event Action OnValueChanged = delegate { };
-
         public event Action OnValueEmpty = delegate { };
+
+        public HealthStat(int max)
+        {
+            MaxValue = max;
+        }
 
         public void ChangeValue(int amount)
         {
-            value += amount;
+            CurrentValue += amount;
+            OnValueChanged();
         }
 
         public void ClearEvents()

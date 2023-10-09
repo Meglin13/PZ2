@@ -15,7 +15,8 @@ namespace Entities
         [SerializeField]
         protected Stats Stats;
 
-        private HealthStat health = new HealthStat();
+        [SerializeField]
+        private HealthStat health;
         public HealthStat Health => health;
 
         public void OnInit(Stats stats)
@@ -27,14 +28,15 @@ namespace Entities
 
         public virtual void OnInit()
         {
-            Health.ChangeValue(Stats.Health);
+            health = new HealthStat(Stats.Health);
+            Health.CurrentValue = Stats.Health;
         }
 
         public void ClearEvents()
         {
             foreach (var item in statsList)
             {
-                item.ClearEvents();
+                item?.ClearEvents();
             }
         }
 

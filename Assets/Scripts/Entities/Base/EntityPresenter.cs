@@ -48,12 +48,12 @@ namespace Entities
         {
             if (move != Vector2.zero)
             {
-                transform.Translate(move * Time.deltaTime * EntityStats.Speed);
+                transform.Translate(EntityStats.Speed * Time.deltaTime * move);
                 var y = move.x < 0 ? 180 : 0;
                 Sprite.transform.rotation = new Quaternion(0, y, 0, 0);
             }
         }
 
-        public float GetHealthProcentage() => model.Health.CurrentValue / EntityStats.Health;
+        public float GetHealthProcentage() => model.Health.CurrentValue / (float)stats.Health;
     }
 }

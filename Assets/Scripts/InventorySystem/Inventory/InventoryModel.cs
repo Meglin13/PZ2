@@ -1,4 +1,5 @@
-﻿using MVP.Base;
+﻿using InventorySystem.Items;
+using MVP.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace InventorySystem.Inventory
 
         public int Capacity => capacity;
 
-        private List<Item> inventory;
+        [SerializeField]
+        private List<Item> inventory = new List<Item>();
 
         public List<Item> Inventory
         {
@@ -32,7 +34,7 @@ namespace InventorySystem.Inventory
         //TODO: Сохранение и загрузка инвентаря
         public override void OnInit()
         {
-            inventory = new List<Item>();
+            
         }
 
         public void AddItem(Item Item)
