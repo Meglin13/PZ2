@@ -23,12 +23,12 @@ namespace Entities
         {
             Stats = stats;
             statsList.Add(Health);
+            health = new HealthStat(Stats.Health);
             OnInit();
         }
 
         public virtual void OnInit()
         {
-            health = new HealthStat(Stats.Health);
             Health.CurrentValue = Stats.Health;
         }
 

@@ -62,7 +62,7 @@ namespace ObjectPooling
         /// <param name="prefab"></param>
         /// <param name="element"></param>
         /// <returns></returns>
-        public bool HasFreeElement(T prefab, out T element)
+        private bool HasFreeElement(T prefab, out T element)
         {
             foreach (var item in pool)
             {
@@ -87,7 +87,7 @@ namespace ObjectPooling
             if (AutoExpand)
                 return CreateObject(prefab, true);
 
-            throw new Exception($"No elements of type {typeof(T)}");
+            return null;
         }
     }
 }

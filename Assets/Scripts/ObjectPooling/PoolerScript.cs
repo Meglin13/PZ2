@@ -9,16 +9,20 @@ namespace ObjectPooling
         public void Initialize() => Instance = this;
 
         [SerializeField]
-        private int poolCount = 10;
+        protected int poolCount = 10;
 
         [SerializeField]
         private bool autoExpand = false;
 
-        internal ObjectPool<T> pool;
+        private ObjectPool<T> pool;
 
-        public ObjectAmountList<T> objectsList;
+        [SerializeField]
+        protected ObjectAmountList<T> objectsList;
 
-        public void Start()
+        [SerializeField]
+        protected float spawnRadius;
+
+        public virtual void Start()
         {
             Initialize();
 
@@ -28,12 +32,24 @@ namespace ObjectPooling
             };
         }
 
-        public virtual T CreateObject(T prefab, Vector3 spawnPoint)
+        public virtual T CreateObject(T prefab, Vector2 spawnPoint = default)
         {
             var obj = pool.GetFreeElement(prefab);
             obj.gameObject.transform.position = spawnPoint;
 
             return obj;
+        }
+
+        protected Vector3 GetRandomSpawnPoint()
+        {
+            Vector2 randomPoint = Random.insideUnitCircle * spawnRadius;
+            return transform.position + new Vector3(randomPoint.x, randomPoint.y, 0f);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, spawnRadius);
         }
     }
 }

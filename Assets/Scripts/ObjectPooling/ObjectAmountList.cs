@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TreeEditor;
 
 [Serializable]
 public class ObjectAmountList<T> where T : class
@@ -20,6 +21,14 @@ public class ObjectAmountList<T> where T : class
     }
 
     public void Add(T item, int amount) => list.Add(new(item, amount));
+
+    public int Count => list.Count;
+
+    public ObjectAmountElement<T> this[int index]
+    {
+        get => list[index];
+        set => list[index] = value;
+    }
 }
 
 [Serializable]

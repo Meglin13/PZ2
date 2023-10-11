@@ -17,7 +17,6 @@ namespace Entities
             this.presenter = (TPresenter)presenter;
         }
 
-        public virtual void UpdateView()
-        { }
+        public virtual void UpdateView() { }
     }
 }

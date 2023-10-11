@@ -50,10 +50,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbfecdef76cc3304d96681477fbd3997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model:
+    Stats: {fileID: 0}
+    health:
+      currentValue: 0
   view: {fileID: 0}
   stats: {fileID: 11400000, guid: 1c2dcb5f33992e04d925337fe4ae7cf4, type: 2}
   Sprite: {fileID: 4708190320490735082}
-  mediator: {fileID: 0}
   weapons:
   - {fileID: 11400000, guid: 10a98c8d71a62684796c9ab152b760e0, type: 2}
   - {fileID: 11400000, guid: 89a4969b1aeb8804186079250c09f110, type: 2}
@@ -167,9 +170,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0

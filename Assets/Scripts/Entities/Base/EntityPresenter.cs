@@ -27,7 +27,10 @@ namespace Entities
 
         private void Awake() => Initialize();
 
-        private void OnEnable() => model?.OnInit();
+        private void OnEnable()
+        {
+            model?.OnInit();
+        }
 
         private void OnDestroy() => Uninitialize();
 

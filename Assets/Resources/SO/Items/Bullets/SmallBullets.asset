@@ -16,7 +16,8 @@ MonoBehaviour:
   InstanceID: 
   _name: "\u041D\u0435\u0431\u043E\u043B\u044C\u0448\u0430\u044F \u043A\u043E\u0440\u043E\u0431\u043A\u0430
     \u0441 \u0431\u043E\u0435\u043F\u0440\u0438\u043F\u0430\u0441\u0430\u043C\u0438"
-  desc: "+ 10 \u043F\u0443\u043B\u044C"
+  desc: "+ 10 \u041F\u0430\u0442\u0440\u043E\u043D\u043E\u0432"
+  amount: 1
   stackCapacity: 999
   icon: {fileID: 21300000, guid: d45f0cae013abb84688afe6e4bc52845, type: 3}
   supplyAmount: 10
