@@ -8,6 +8,9 @@ namespace Entities.Player
     public class PlayerView : EntityView<PlayerPresenter>
     {
         [SerializeField]
+        private GameObject deathScreen;
+
+        [SerializeField]
         private GameObject inventory;
 
         [SerializeField]
@@ -35,6 +38,8 @@ namespace Entities.Player
 
             changeAction.performed += ChangeWeapon;
             inventoryAction.performed += Inventory;
+
+            this.presenter.Model.Health.OnValueEmpty += () => deathScreen.SetActive(true);
         }
 
         private void OnDestroy()

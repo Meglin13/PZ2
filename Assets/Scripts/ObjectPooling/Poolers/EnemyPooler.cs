@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace ObjectPooling.Poolers
 {
@@ -6,6 +9,18 @@ namespace ObjectPooling.Poolers
     {
         [SerializeField]
         private int spawnEnemyCount = 3;
+
+        private List<EnemyPresenter> currentEnemies = new();
+
+        public List<EnemyPresenter> CurrentEnemies 
+        { 
+            get => currentEnemies; 
+            private set => currentEnemies = value; 
+        }
+
+        public event Action OnEnemiesDefeated = delegate { };
+
+        //TODO: Учет заспавненных врагов
 
         public override void Start()
         {
@@ -19,6 +34,24 @@ namespace ObjectPooling.Poolers
                 {
                     break;
                 }
+
+                currentEnemies.Add(enemy);
+                enemy.Model.Health.OnValueEmpty += () => EnemyDefeated(enemy);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            OnEnemiesDefeated = null;
+        }
+
+        private void EnemyDefeated(EnemyPresenter enemy)
+        {
+            currentEnemies.Remove(enemy);
+
+            if (currentEnemies.Count == 0)
+            {
+                OnEnemiesDefeated();
             }
         }
 

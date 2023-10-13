@@ -1,3 +1,4 @@
+using Entities.BaseStats;
 using Entities.Interfaces;
 using MVP.Base.Interfaces;
 using System;
@@ -13,13 +14,13 @@ namespace Entities
         protected List<IStat> statsList = new List<IStat>();
 
         [SerializeField]
-        protected Stats Stats;
+        protected EntityStats Stats;
 
         [SerializeField]
         private HealthStat health;
         public HealthStat Health => health;
 
-        public void OnInit(Stats stats)
+        public void OnInit(EntityStats stats)
         {
             Stats = stats;
             statsList.Add(Health);

@@ -12,12 +12,10 @@ namespace InventorySystem.Inventory
     {
         [SerializeField]
         private int capacity;
-
         public int Capacity => capacity;
 
         [SerializeField]
         private List<Item> inventory = new List<Item>();
-
         public List<Item> Inventory
         {
             get
@@ -27,6 +25,7 @@ namespace InventorySystem.Inventory
 
                 return inventory;
             }
+            private set => inventory = value;
         }
 
         public event Action OnInventoryChanged = delegate { };
@@ -36,6 +35,8 @@ namespace InventorySystem.Inventory
         {
             
         }
+
+        public void LoadInventory(List<Item> list) => inventory = list;
 
         public void AddItem(Item Item)
         {

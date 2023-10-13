@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c43c1d0b4180ddc4e941ff7f6fa43c79, type: 3}
-  m_Name: Zombie
+  m_Script: {fileID: 11500000, guid: 6d76579542bf7644884607f58b37661b, type: 3}
+  m_Name: Bat
   m_EditorClassIdentifier: 
-  health: 50
-  speed: 3
+  weaponSprite: {fileID: 0}
+  cooldownBetweenAttacks: 3
+  damage: 10
+  attackRange: 3

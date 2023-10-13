@@ -2,7 +2,7 @@
 
 namespace Entities
 {
-    internal class EntityDetectorScript : MonoBehaviour
+    public class EntityDetectorScript : MonoBehaviour
     {
         [SerializeField] 
         private float detectionRadius = 2.0f;

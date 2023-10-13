@@ -1,9 +1,18 @@
-﻿using Entities;
+﻿using Combat;
+using Entities;
+using Entities.BaseStats;
 using InventorySystem.Items;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyPresenter : EntityPresenter<EntityModel, EnemyView>
 {
+    [SerializeField]
+    private AttackerBase<MeleeWeaponStats> attaker;
+
+    [SerializeField]
+    private MeleeWeaponStats weaponStats;
+    
     [SerializeField]
     private ItemScript item;
 
@@ -18,6 +27,20 @@ public class EnemyPresenter : EntityPresenter<EntityModel, EnemyView>
 
         item.transform.SetParent(null);
         item.gameObject.SetActive(false);
+
+        attaker.Init(null);
+    }
+
+    private void Update()
+    {
+        if (detector.NearestEntity != null)
+        {
+            Vector2 direction = ((Vector2)detector.NearestEntity.transform.position - (Vector2)transform.position).normalized;
+
+            transform.Translate(direction * EntityStats.Speed * Time.deltaTime);
+
+            attaker.Attack(weaponStats);
+        }
     }
 
     private void Death()

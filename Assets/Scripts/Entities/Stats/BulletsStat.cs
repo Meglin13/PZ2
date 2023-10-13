@@ -32,7 +32,7 @@ namespace Entities
             OnValueEmpty = null;
         }
 
-        public void SetWeapoBulletsAmount(int amount) => weaponBulletsAmount = amount;
+        public void SetWeaponBulletsAmount(int amount) => weaponBulletsAmount = amount;
 
         /// <summary>
         /// Изменение количества пуль на -1

@@ -31,10 +31,7 @@ namespace Entities
         public event Action OnValueChanged = delegate { };
         public event Action OnValueEmpty = delegate { };
 
-        public HealthStat(int max)
-        {
-            MaxValue = max;
-        }
+        public HealthStat(int max) => MaxValue = max;
 
         public void ChangeValue(int amount)
         {

@@ -1,3 +1,4 @@
+using Entities.BaseStats;
 using System;
 using System.Collections.Generic;
 
@@ -49,9 +50,12 @@ namespace Entities.Player
         public void SetWeapon(WeaponStats weapon)
         {
             currentWeapon = weapon;
-            bullets.SetWeapoBulletsAmount(weapon.BulletsAmount);
 
-            Bullets.Reload();
+            if (weapon is RangedWeaponStats ranged)
+            {
+                bullets.SetWeaponBulletsAmount(ranged.BulletsAmount);
+                Bullets.Reload();
+            }
 
             OnWeaponChanged();
         }

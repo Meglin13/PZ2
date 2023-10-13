@@ -1,25 +1,30 @@
-﻿using InventorySystem.Inventory;
+﻿using Combat;
+using Combat.Attackers;
+using Entities.BaseStats;
+using InventorySystem.Inventory;
 using InventorySystem.Items;
-using ObjectPooling;
+using SaveLoadSystem;
+using System;
 using System.Collections.Generic;
-using TMPro;
+using System.Linq;
 using UnityEngine;
 
 namespace Entities.Player
 {
-    public class PlayerPresenter : EntityPresenter<PlayerModel, PlayerView>
+    public class PlayerPresenter : EntityPresenter<PlayerModel, PlayerView>, ISaveable
     {
         private InventoryPlayerMediator mediator;
+
+        [SerializeField]
+        private AttackerBase<RangedWeaponStats> attacker;
 
         [SerializeField]
         private List<WeaponStats> weapons;
 
         [SerializeField]
         private GameObject gunPoint;
-
         public GameObject GunPoint => gunPoint;
 
-        private float bulletCooldownTimer;
         private float weaponChangeCooldownTimer;
 
         [SerializeField]
@@ -28,12 +33,11 @@ namespace Entities.Player
         [SerializeField]
         private int bullets = 50;
 
-        [SerializeField]
-        private EntityDetectorScript detector;
-
         public override void Initialize()
         {
             base.Initialize();
+
+            attacker.Init(model.Bullets);
 
             model.SetWeapons(weapons, bullets);
 
@@ -45,7 +49,6 @@ namespace Entities.Player
 
         private void Update()
         {
-            bulletCooldownTimer += Time.deltaTime;
             weaponChangeCooldownTimer += Time.deltaTime;
 
             if (detector.NearestEntity != null)
@@ -66,15 +69,11 @@ namespace Entities.Player
 
         public void Attack()
         {
-            if (model.Bullets.CurrentValue > 0 & bulletCooldownTimer > model.CurrentWeapon.CooldownBetweenShots)
+            //var attack = attackers.FirstOrDefault(x => x.Stats.GetType() == Model.CurrentWeapon.GetType());
+
+            if (attacker != null)
             {
-                bulletCooldownTimer = 0;
-
-                model.Bullets.ChangeValue();
-
-                var bullet = PoolerScript<BulletScript>.Instance.CreateObject(model.CurrentWeapon.BulletPrefab, GunPoint.transform.position);
-                bullet.transform.rotation = GunPoint.transform.rotation;
-                bullet.RB.velocity = bullet.transform.up * model.CurrentWeapon.BulletSpeed;
+                attacker.Attack(Model.CurrentWeapon as RangedWeaponStats);
             }
         }
 
@@ -110,7 +109,6 @@ namespace Entities.Player
         {
             Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
             RotateGunPoint(direction);
-
         }
 
         public void ChangeWeapon()
@@ -123,10 +121,32 @@ namespace Entities.Player
         }
 
         public string GetBullets() => model.Bullets.CurrentValue + "/" + model.Bullets.AvailableBullets;
-        
-        public void SetInventoryMediator(InventoryPlayerMediator mediator)
+
+        public void SetInventoryMediator(InventoryPlayerMediator mediator) => this.mediator = mediator;
+
+        public object GetObjects()
         {
-            this.mediator = mediator;
+            var data = new PlayerData
+            {
+                health = model.Health.CurrentValue,
+                bullets = model.Bullets.CurrentValue
+            };
+
+            return data;
+        }
+
+        public void LoadObjects(object save)
+        {
+            var data = (PlayerData)save;
+            model.Health.CurrentValue = data.health;
+            model.Bullets.AvailableBullets = data.bullets;
+        }
+
+        [Serializable]
+        private struct PlayerData
+        {
+            public int health;
+            public int bullets;
         }
     }
 }

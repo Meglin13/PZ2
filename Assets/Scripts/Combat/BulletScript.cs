@@ -1,3 +1,5 @@
+using Entities.BaseStats;
+using Entities.Interfaces;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -6,7 +8,6 @@ public class BulletScript : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody2D rb;
-
     public Rigidbody2D RB => rb;
 
     [SerializeField]
@@ -22,9 +23,10 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<EnemyPresenter>(out var presenter))
+        if (collision.gameObject.TryGetComponent<IDamageable>(out var damageable) & 
+            collision.gameObject.layer != gameObject.layer)
         {
-            presenter.Model.Health.ChangeValue(-weaponStats.Damage);
+            damageable.TakeDamage(-weaponStats.Damage);
         }
 
         gameObject.SetActive(false);

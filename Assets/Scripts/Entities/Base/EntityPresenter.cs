@@ -1,36 +1,36 @@
 using MVP.Base.Interfaces;
 using UnityEngine;
+using Entities.Interfaces;
+using Entities.BaseStats;
 
 namespace Entities
 {
     [RequireComponent(typeof(BoxCollider2D))]
     [RequireComponent(typeof(Rigidbody2D))]
-    public class EntityPresenter<TModel, TView> : MonoBehaviour, IPresenter
+    public class EntityPresenter<TModel, TView> : MonoBehaviour, IPresenter, IDamageable
         where TModel : EntityModel, new()
         where TView : IView
     {
         [SerializeField]
         protected TModel model;
-
         public TModel Model => model;
 
         [SerializeField]
         protected TView view;
 
         [SerializeField]
-        protected Stats stats;
-
-        public Stats EntityStats => stats;
+        protected EntityStats stats;
+        public EntityStats EntityStats => stats;
 
         [SerializeField]
         private GameObject Sprite;
 
+        [SerializeField]
+        protected EntityDetectorScript detector;
+
         private void Awake() => Initialize();
 
-        private void OnEnable()
-        {
-            model?.OnInit();
-        }
+        private void OnEnable() => model?.OnInit();
 
         private void OnDestroy() => Uninitialize();
 
@@ -49,7 +49,7 @@ namespace Entities
 
         public virtual void Move(Vector2 move)
         {
-            if (move != Vector2.zero)
+            if (move != Vector2.zero & gameObject.activeInHierarchy)
             {
                 transform.Translate(EntityStats.Speed * Time.deltaTime * move);
                 var y = move.x < 0 ? 180 : 0;
@@ -58,5 +58,7 @@ namespace Entities
         }
 
         public float GetHealthProcentage() => model.Health.CurrentValue / (float)stats.Health;
+
+        public void TakeDamage(int damage) => model.Health.ChangeValue(damage);
     }
 }

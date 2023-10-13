@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1363648051756471485}
   - component: {fileID: -5856204085664706293}
   - component: {fileID: 7471910531606155418}
+  - component: {fileID: 8714131957994063274}
   - component: {fileID: 6556188312737639807}
   - component: {fileID: -3827008166177529412}
   m_Layer: 8
@@ -57,6 +58,9 @@ MonoBehaviour:
   view: {fileID: 9202653451211031051}
   stats: {fileID: 11400000, guid: a54aff8316938574695954d09bb3f1a4, type: 2}
   Sprite: {fileID: 1816517171823889259}
+  detector: {fileID: 7471910531606155418}
+  attaker: {fileID: 8714131957994063274}
+  weaponStats: {fileID: 11400000, guid: 993797713698e894f80e8dce7650558e, type: 2}
   item: {fileID: 1166537910633932081}
   itemDropRate: 100
 --- !u!114 &7471910531606155418
@@ -72,6 +76,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 7
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &8714131957994063274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363648051756471486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bc79c77035c73445ae22d7d97be63b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128

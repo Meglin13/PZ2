@@ -9,8 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2230227528362624680}
+  - component: {fileID: 6116385399045519519}
   - component: {fileID: 2230227528362624597}
   - component: {fileID: 7795498398975617550}
+  - component: {fileID: 6993774353810021222}
+  - component: {fileID: 6850812239765449168}
   - component: {fileID: 2230227528362624683}
   - component: {fileID: 2230227528362624596}
   - component: {fileID: 2230227528362624599}
@@ -38,6 +41,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6116385399045519519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2230227528362624681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a72ae3082aa3145b0ad20dd0344e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: db3fcb20-7670-4c92-a032-721b877d3a9d
 --- !u!114 &2230227528362624597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,15 +71,16 @@ MonoBehaviour:
     health:
       currentValue: 0
   view: {fileID: 0}
-  stats: {fileID: 11400000, guid: 1c2dcb5f33992e04d925337fe4ae7cf4, type: 2}
+  stats: {fileID: 11400000, guid: f48dfb48510b0884296c5715785319e7, type: 2}
   Sprite: {fileID: 4708190320490735082}
+  detector: {fileID: 7795498398975617550}
+  attacker: {fileID: 6993774353810021222}
   weapons:
   - {fileID: 11400000, guid: 10a98c8d71a62684796c9ab152b760e0, type: 2}
   - {fileID: 11400000, guid: 89a4969b1aeb8804186079250c09f110, type: 2}
   gunPoint: {fileID: 8758114839267028361}
   weaponChangeCooldown: 1
   bullets: 99
-  detector: {fileID: 7795498398975617550}
 --- !u!114 &7795498398975617550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,6 +94,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 7
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &6993774353810021222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2230227528362624681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5381f081d28c044694d42b3672512c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunPoint: {fileID: 8758114839267028361}
+--- !u!114 &6850812239765449168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2230227528362624681}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bc79c77035c73445ae22d7d97be63b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -170,7 +215,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
+  m_Mass: 150
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0

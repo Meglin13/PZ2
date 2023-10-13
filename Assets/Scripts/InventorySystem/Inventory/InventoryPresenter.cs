@@ -1,9 +1,11 @@
 ﻿using InventorySystem.Items;
 using MVP.Base;
+using SaveLoadSystem;
+using System.Collections.Generic;
 
 namespace InventorySystem.Inventory
 {
-    public class InventoryPresenter : BasePresenter<InventoryView, InventoryModel>
+    public class InventoryPresenter : BasePresenter<InventoryView, InventoryModel>, ISaveable
     {
         private InventoryPlayerMediator mediator;
 
@@ -22,6 +24,16 @@ namespace InventorySystem.Inventory
         public void UseItem(Item item)
         {
             mediator.PlayerUsedItem(item);
+        }
+
+        public object GetObjects()
+        {
+            return model.Inventory;
+        }
+
+        public void LoadObjects(object save)
+        {
+            model.LoadInventory((List<Item>)save);
         }
     }
 }
