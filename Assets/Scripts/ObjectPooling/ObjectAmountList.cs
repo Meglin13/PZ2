@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using TreeEditor;
 
 [Serializable]
 public class ObjectAmountList<T> where T : class
