@@ -1,12 +1,10 @@
 ﻿using Combat;
-using Combat.Attackers;
 using Entities.BaseStats;
 using InventorySystem.Inventory;
 using InventorySystem.Items;
 using SaveLoadSystem;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Entities.Player
@@ -30,16 +28,13 @@ namespace Entities.Player
         [SerializeField]
         private float weaponChangeCooldown = 2;
 
-        [SerializeField]
-        private int bullets = 50;
-
         public override void Initialize()
         {
             base.Initialize();
 
             attacker.Init(model.Bullets);
 
-            model.SetWeapons(weapons, bullets);
+            model.SetWeapons(weapons, 0);
 
             model.Bullets.OnValueChanged += () => view.UpdateView();
             model.OnWeaponChanged += () => view.UpdateView();
@@ -80,28 +75,22 @@ namespace Entities.Player
         public override void Move(Vector2 move)
         {
             base.Move(move);
-            RotateGunPoint(move);
+
+            if (detector.NearestEntity == null)
+            {
+                RotateGunPoint(move);
+            }
         }
 
         public void RotateGunPoint(Vector2 move)
         {
             if (move != Vector2.zero)
             {
-                //GunPoint.transform.localPosition = targetPosition * 2;
-
-                //float rot_z = Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg;
-                //GunPoint.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
-
-
-                /////////////////////
-
                 float angle = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
 
                 GunPoint.transform.rotation = Quaternion.Euler(0f, 0f, angle - 90);
 
                 GunPoint.transform.localPosition = move * 2;
-
-                /////////////////////
             }
         }
 
@@ -129,7 +118,7 @@ namespace Entities.Player
             var data = new PlayerData
             {
                 health = model.Health.CurrentValue,
-                bullets = model.Bullets.CurrentValue
+                bullets = model.Bullets.CurrentValue + model.Bullets.AvailableBullets
             };
 
             return data;
@@ -139,7 +128,7 @@ namespace Entities.Player
         {
             var data = (PlayerData)save;
             model.Health.CurrentValue = data.health;
-            model.Bullets.AvailableBullets = data.bullets;
+            model.Bullets.AvailableBullets = data.bullets - model.Bullets.CurrentValue;
         }
 
         [Serializable]

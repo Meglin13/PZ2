@@ -36,7 +36,13 @@ namespace InventorySystem.Inventory
             
         }
 
-        public void LoadInventory(List<Item> list) => inventory = list;
+        public void LoadInventory(List<Item> list)
+        {
+            foreach (Item item in list)
+            {
+                inventory.Add(item.GetCopy());
+            }
+        }
 
         public void AddItem(Item Item)
         {

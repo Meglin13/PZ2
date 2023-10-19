@@ -9,15 +9,18 @@ namespace SaveLoadSystem
     {
         public static string SavePath => $"{Application.persistentDataPath}\\GameData.dat";
 
-        private void OnEnable()
+        [ContextMenu("Delete Save")]
+        private void DeleteSave()
         {
-            Load();
+            if (File.Exists(SavePath))
+            {
+                File.Delete(SavePath);
+            }
         }
 
-        private void OnApplicationQuit()
-        {
-            Save();
-        }
+        private void OnEnable() => Load();
+
+        private void OnDisable() => Save();
 
         private void Save()
         {
@@ -57,20 +60,19 @@ namespace SaveLoadSystem
 
         private void CaptureState(Dictionary<string, object> state)
         {
-            foreach (var saveable in FindObjectsOfType<SavableEntity>())
+            foreach (var saveable in FindObjectsOfType<SavableEntity>(true))
             {
-                state[saveable.ID]
-                = saveable.CaptureState();
+                state[saveable.ID] = saveable.CaptureState();
             }
         }
 
         private void RestoreState(Dictionary<string, object> state)
         {
-            foreach (var saveab1e in FindObjectsOfType<SavableEntity>())
+            foreach (var saveable in FindObjectsOfType<SavableEntity>(true))
             {
-                if (state.TryGetValue(saveab1e.ID,out object value))
+                if (state.TryGetValue(saveable.ID,out object value))
                 {
-                    saveab1e.RestoreState(value);
+                    saveable.RestoreState(value);
                 }
             }
         }

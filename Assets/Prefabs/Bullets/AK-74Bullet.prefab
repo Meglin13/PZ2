@@ -71,6 +71,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AK-74Bullet
       objectReference: {fileID: 0}
+    - target: {fileID: 6238868547830518094, guid: 31fca9dd735383748b996230d00bf68d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7248559537532761067, guid: 31fca9dd735383748b996230d00bf68d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7872899956926906017, guid: 31fca9dd735383748b996230d00bf68d, type: 3}
       propertyPath: weaponStats
       value: 

@@ -11,7 +11,7 @@ namespace Entities
     [Serializable]
     public class EntityModel : IModel
     {
-        protected List<IStat> statsList = new List<IStat>();
+        protected List<IStat> statsList = new();
 
         [SerializeField]
         protected EntityStats Stats;
@@ -23,15 +23,12 @@ namespace Entities
         public void OnInit(EntityStats stats)
         {
             Stats = stats;
-            statsList.Add(Health);
             health = new HealthStat(Stats.Health);
+            statsList.Add(health);
             OnInit();
         }
 
-        public virtual void OnInit()
-        {
-            Health.CurrentValue = Stats.Health;
-        }
+        public virtual void OnInit() => Health.CurrentValue = Stats.Health;
 
         public void ClearEvents()
         {

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.akaal.pvcustomizer": "https://github.com/h-sigma/PvCustomizer.git",
+    "com.domybest.mybox": "https://github.com/Deadcows/MyBox.git",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.collab-proxy": "2.0.4",
     "com.unity.feature.2d": "1.0.0",

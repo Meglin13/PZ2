@@ -14,17 +14,23 @@ namespace Entities
         public int AvailableBullets
         {
             get => availableBullets;
-            set => availableBullets = value;
+            set
+            {
+                availableBullets = value;
+
+                //if (CurrentValue == 0)
+                //{
+                //    Reload();
+                //}
+
+                OnValueChanged?.Invoke();
+            }
         }
 
         private int weaponBulletsAmount;
 
         public event Action OnValueChanged = delegate { };
         public event Action OnValueEmpty = delegate { };
-
-        public BulletsStat()
-        {
-        }
 
         public void ClearEvents()
         {
@@ -46,7 +52,7 @@ namespace Entities
                 Reload();
             }
 
-            OnValueChanged();
+            OnValueChanged?.Invoke();
         }
 
         /// <summary>
@@ -56,7 +62,7 @@ namespace Entities
         public void ChangeValue(int amount)
         {
             availableBullets += amount;
-            OnValueChanged();
+            OnValueChanged?.Invoke();
         }
 
         /// <summary>
@@ -75,7 +81,8 @@ namespace Entities
 
                 AvailableBullets -= bulletsReload;
                 value = bulletsReload;
-                OnValueChanged();
+
+                OnValueChanged?.Invoke();  
             }
         }
     }

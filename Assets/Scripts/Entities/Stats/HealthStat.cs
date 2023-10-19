@@ -19,11 +19,11 @@ namespace Entities
             {
                 currentValue = Mathf.Clamp(value, 0, MaxValue);
 
-                OnValueChanged();
+                OnValueChanged?.Invoke();
 
                 if (currentValue == 0)
                 {
-                    OnValueEmpty();
+                    OnValueEmpty?.Invoke();
                 }
             }
         }
@@ -36,7 +36,7 @@ namespace Entities
         public void ChangeValue(int amount)
         {
             CurrentValue += amount;
-            OnValueChanged();
+            OnValueChanged?.Invoke();
         }
 
         public void ClearEvents()

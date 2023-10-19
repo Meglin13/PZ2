@@ -17,6 +17,9 @@ namespace InventorySystem.Items
 
         public override void OnPickUp(InventoryModel inventory) { }
 
-        public override void UseItem(PlayerModel model) => model.GetStat<T>().ChangeValue(supplyAmount);
+        public override void UseItem(PlayerModel model)
+        {
+            model.GetStat<T>().ChangeValue(supplyAmount);
+        }
     }
 }

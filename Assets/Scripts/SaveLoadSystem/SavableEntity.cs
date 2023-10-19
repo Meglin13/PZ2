@@ -17,10 +17,9 @@ namespace SaveLoadSystem
         {
             var state = new Dictionary<string, object>();
 
-            foreach (var saveab1e in GetComponents<ISaveable>())
+            foreach (var saveable in GetComponents<ISaveable>())
             {
-                state[saveab1e.GetType().ToString()]
-                = saveab1e.GetObjects();
+                state[saveable.GetType().ToString()] = saveable.GetObjects();
             }
 
             return state;
@@ -30,13 +29,13 @@ namespace SaveLoadSystem
         {
             var stateDictionary = (Dictionary<string, object>)state;
 
-            foreach (var saveab1e in GetComponents<ISaveable>())
+            foreach (var saveable in GetComponents<ISaveable>())
             {
-                string typeName = saveab1e.GetType().ToString();
+                string typeName = saveable.GetType().ToString();
 
                 if (stateDictionary.TryGetValue(typeName, out object value))
                 {
-                    saveab1e.LoadObjects(value);
+                    saveable.LoadObjects(value);
                 }
             }
         }

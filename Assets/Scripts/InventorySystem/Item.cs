@@ -45,10 +45,10 @@ namespace InventorySystem.Items
         public int StackCapacity => stackCapacity;
 
         [SerializeField]
-        [PvIcon]
         private Sprite icon;
-        public Sprite Icon => icon;
 
+        [PvIcon]
+        public Sprite Icon => icon;
 
         public Item GetCopy()
         {

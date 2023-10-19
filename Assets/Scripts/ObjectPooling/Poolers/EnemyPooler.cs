@@ -26,6 +26,17 @@ namespace ObjectPooling.Poolers
         {
             base.Start();
 
+            SpawnEnemies();
+        }
+
+        private void OnDestroy()
+        {
+            OnEnemiesDefeated = null;
+        }
+
+        [ContextMenu("Spawn Enemies")]
+        private void SpawnEnemies()
+        {
             for (int i = 0; i < spawnEnemyCount; i++)
             {
                 var enemy = CreateObject(objectsList[Random.Range(0, objectsList.Count)].item);
@@ -38,11 +49,6 @@ namespace ObjectPooling.Poolers
                 currentEnemies.Add(enemy);
                 enemy.Model.Health.OnValueEmpty += () => EnemyDefeated(enemy);
             }
-        }
-
-        private void OnDestroy()
-        {
-            OnEnemiesDefeated = null;
         }
 
         private void EnemyDefeated(EnemyPresenter enemy)
